@@ -51,6 +51,7 @@ sudo python ARP-Spoofer.py -t <target_ip> -s <spoofed_ip> -i <interface>
 ```
 
 ***Example:***
+
 The target IP address is made up 
 ```
 sudo ARP-Spoofer.py -t 192.168.1.122 -s 192.168.1.1 -i eth0
