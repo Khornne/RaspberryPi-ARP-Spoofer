@@ -19,9 +19,9 @@ This repo is my university disertation. The project is creating an RaspberryPi t
 3. The victim updates the ARP table with the threat actor's MAC address which then redirects the network traffic to the attacker not the router.
 
 ***Forwarding Traffic***
----
+
 Due to ARP spoofing affects the LAN settings. It may DoS (Denial of Service) the victim's internet making it lose access. To prevent this you need to enable IP forwarding on th threat actor's machine. This allows attackers to pass the traffic between the victim and the router while still maintaing the internet connection as it is still intercepting traffic.
----
+
 
 to enable IP forwarding on Linux:
 ```
@@ -32,12 +32,14 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 Make to specify the correct IP addresses and network interface.
 
 *On Linux:*
+
 open up a terminal then type this command
 ```
 ifconfig
 ```
 
 *On Windows:*
+
 Open up CMD or Powershell. If it doesn't work run it as administrator then try again
 ```
 ipconfig/all
