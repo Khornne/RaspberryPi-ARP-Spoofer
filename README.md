@@ -10,7 +10,7 @@ the *Defense* folder will contain the detection script of the ARP spoofer. Insid
 # Requirements
 If you wish to recreate this project here are the requirements needed.
 
-### Hardware
+### Hardware:
 
 ***1. Raspberry PI***
 This projected uses a Raspberry PI 5 with 8gb of ram. However, you do not need the latest hardware for this. Older models of the PI should work as this project is not hardware intensive. If you don't have the money for one, an old laptop that can run Kali linux should be fine. As long as you have a device that can run Kali Linux then there should be no problem.
@@ -18,7 +18,7 @@ This projected uses a Raspberry PI 5 with 8gb of ram. However, you do not need t
 ***2. Second Laptop/Device***
 The second laptop will be acting as the victim machine as well as run the detection script. If you opt to choose a different device from a laptop so long as the device can run python as it is a needed to run the detection script. As well as being able to connect to a network.
 
-### Software
+### Software:
 
 ***1. Kali Linux***
 
