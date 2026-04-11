@@ -21,16 +21,20 @@ The second laptop will be acting as the victim machine as well as run the detect
 ### Software
 
 ***1. Kali Linux***
+
 This is an all in one Pentesting Operating System. A lot of the tools needed for network hacking, port scanning, password cracking, etc. are already pre-installed and configured.
 
 ***2. Python***
+
 You will need python so that you are able to run the scripts. This is a ***HARD*** requirement as if you cannot run or install python you will not be able to run this project.
 
 ### Python Libraries
 There are only three libraries used. They are all found in the requirements.txt.
 
 ***Installation:***
+
 First step is to set up a python virtual environment
+
 *WINDOWS AND LINUX:*
 ```
 python -m venv .venv
