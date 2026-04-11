@@ -15,7 +15,7 @@ This repo is my university disertation. The project is creating an RaspberryPi t
 
 ***Steps:***
 1. The victim sends and ARP request to find the MAC address of the router
-2. The attecker then sends a *Fake* ARP response making the threat actor's MAC address pose as the router IP
+2. The threat actor then sends a *Fake* ARP response making the threat actor's MAC address pose as the router IP
 3. The victim updates the ARP table with the threat actor's MAC address which then redirects the network traffic to the attacker not the router.
 
 ***Forwarding Traffic***
@@ -42,7 +42,7 @@ ifconfig
 
 Open up CMD or Powershell. If it doesn't work run it as administrator then try again
 ```
-ipconfig/all
+ipconfig/all or ipconfig
 ```
 
 ***Command:***
@@ -54,5 +54,5 @@ sudo python ARP-Spoofer.py -t <target_ip> -s <spoofed_ip> -i <interface>
 
 The target IP address is made up 
 ```
-sudo ARP-Spoofer.py -t 192.168.1.122 -s 192.168.1.1 -i eth0
+sudo ARP-Spoofer.py -t 192.168.1.123 -s 192.168.1.1 -i eth0
 ```
