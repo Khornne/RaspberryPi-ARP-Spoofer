@@ -71,16 +71,16 @@ def spoof_detection(pkt):
         SYN = TCP(sport=40508, dport=40508, flags="S", seq=12345)
         ER = Ether(dst=mac)
         # TPC ACK no recieved raise alarm
-        if not srp1(ER / ip / SYN, verbose=FALSE, timeout=2):
+        if not srp1(ER / ip / SYN, verbose=False, timeout=2):
             alarm('TCP ACK not found. fake IP-MAC pair detected')
         # TCP ACK recieved then add IP and MAC pair to IP_MAC_PAIRS table
-        else: 
+        else:
             IP_MAC_PAIRS[ip_] = pkt[ARP].hwsrc
     # ARP reply without ARP request message then send ARP request for IP source
     # This causes the real IP owner on the network to respond with an ARP reply treating
-    # it as a Full Cycle 
+    # it as a Full Cycle
     else:
-        send(ARP(op=1, pdst=ip_), verbose=FALSE)
+        send(ARP(op=1, pdst=ip_), verbose=False)
 
 def alarm(alarm_type):
     print('Under Attack ', alarm_type)
