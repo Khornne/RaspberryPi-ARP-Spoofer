@@ -26,11 +26,11 @@ def print_arp(pkt):
 
 def incoming_reply(pkt):
     # Checks if packet is is a incoming ARP reply 
-    return pkt[ARP].prcs != str(get_if_addr(conf.iface) and pkt[ARP].op == 2)
+    return pkt[ARP].psrc != str(get_if_addr(conf.iface) and pkt[ARP].op == 2)
 
 def outgoing_request(pkt):
     # Checks if packet is an outgoing ARP reqeuest
-    return pkt[ARP].prcs != str(get_if_addr(conf.iface) and pkt[ARP].op == 1)
+    return pkt[ARP].psrc != str(get_if_addr(conf.iface) and pkt[ARP].op == 1)
 
 
 def add_request(pkt):
