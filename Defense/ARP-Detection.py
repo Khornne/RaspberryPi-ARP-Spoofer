@@ -9,7 +9,7 @@ ARP_REQ_TABLE = {}
 
 def sniff_requests():
     # Sniffs ARP requests (that has op 1) of the machine on the network
-    sniff(filter='arp', lfilter=outgoing_req, orn=add_req, iface=conf.iface)
+    sniff(filter='arp', lfilter=outgoing_request, prn=add_request, iface=conf.iface)
 
 
 def sniff_replays():
@@ -45,7 +45,7 @@ def check_arp_header(pkt):
         return alarm('ARP message inconsistent')
     return traffic_filter(pkt)
 
-def traffit_filter(pkt):
+def traffic_filter(pkt):
     """
     Filters all known traffic. If IP to MAC is consistent with host database
     then no alarm will be raised. If there are inconsistencies then alarm.
@@ -66,7 +66,7 @@ def spoof_detection(pkt):
     mac = pkt[0][ARP].hwsrc
 
     # Check if source of reply is real by sending TCP SYN 
-    if ip_ in ARP_REQ_TABLE.keys() nad (time - ARP_REQ_TABLE[ip_]).total_seconds() <= 5:
+    if ip_ in ARP_REQ_TABLE.keys() and (time - ARP_REQ_TABLE[ip_]).total_seconds() <= 5:
         ip = IP(dst=ip_)
         SYN = TCP(sport=40508, dport=40508, flags="S", seq=12345)
         ER = Ether(dst=mac)
@@ -87,10 +87,10 @@ def alarm(alarm_type):
 
 
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     req_ = threading.Thread(target=sniff_requests, args=())
     req_.start()
-    rep_ = threading.Thread(target=sniff_replays, args())
+    rep_ = threading.Thread(target=sniff_replays, args=())
     rep_.start()
 
 
