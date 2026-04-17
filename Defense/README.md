@@ -38,8 +38,3 @@ If the script doesn't run you may need to open powershell as an administrator
 ```
 python .\ARP-Detection.py
 ```
-```
-```
-
-
-
