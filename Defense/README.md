@@ -7,6 +7,7 @@
 3. Once found inconsistent it will alarm the user that it they are under attack
 
 ***ACTIVE***
+
 Within the time of this research I had time to add active detection:
 1. ARP message reply answer will be checked if it is real through sending a
 TCP SYN packet
