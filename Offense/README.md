@@ -1,7 +1,7 @@
 # RaspberryPi-ARP-Spoofer
 This is created for ***EDUCATIONAL*** purposes only. This script is only to learn how threat actors use this technique. This is ***NOT*** do be used on a public network.
 
-### ARP Spoofing Offens
+### ARP Spoofing Offense
 
 ***How It Works:***
     1. The threat actor sends fake ARP responses to both vitim and router. The threat actor's MAC address pretends to be the router's IP address
